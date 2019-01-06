@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t magnusev/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run magnusev/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t magnusev/multi-client ./client
+  - docker build -t magnusev/multi-nginx ./nginx
+  - docker build -t magnusev/multi-server ./server
+  - docker build -t magnusev/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push magnusev/multi-client
+  - docker push magnusev/multi-nginx
+  - docker push magnusev/multi-server
+  - docker push magnusev/multi-worker
