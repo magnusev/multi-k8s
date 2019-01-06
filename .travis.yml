@@ -14,7 +14,7 @@ after_success:
   - docker build -t magnusev/multi-server ./server
   - docker build -t magnusev/multi-worker ./worker
   # Log in to the docker CLI
-  - docker login --username "$DOCKER_ID" --password $DOCKER_PASSWORD
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push magnusev/multi-client
   - docker push magnusev/multi-nginx
