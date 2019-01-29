@@ -1,0 +1,11 @@
+sudo: required
+services:
+- docker
+before_install:
+- curl https://sdk.cloud.google.com | bash > /dev/null;
+- source $HOME/google-cloud-sdk/path.bash.inc
+- gcloud components update kubectl
+- gcloud auth activate-service-account --key-file service-account.json
+env:
+  global:
+    secure: opLiPgfMMhKFxbVnTYKCK/yXbBVAI4BdVIyV9mmGTfPtRaY9uiuko7D4PDKq0jr9fk9sEWcH8LKAV/KRc99qlJ7b4rDuL9BiM27oJ/xaxMrawl9VrazMsRHG9xNPDlkv5dI6OCVafz+Bw9/JhkryhfJQjfU/u5V8gJLw8PdnvsJfOZSbIo3YoTN7COOFKoRpP16yFQkiwFAuyaoC7wONzh4BYt1sVcGiJRj68ER9BkSUO5fdwsBJIpA98yYw7zA7vKFYfRB89hyEBfJl+pOa0WRWZBTpIB3m19zYW3gBgnYoWw+I9CrqnyszsGRJlGGA1Vfbz5vfz/YlD5n3JGN/m5BEGYYgU2ISIYTTdj1rQ7gmtRqb3WKcs/ebXjzTTpndRWePo7uzPBOANbc50WliErAZZuZ4wnrExG+/zQwxBlki2cCY9TsI5knz+GSHRGz+mGvrCM2EVbyLnj3EZVVEz9Zzj7lZk9d7Bq+lhnwz9gMKxTl86SPgyLffolE7fBkNLg47AwLhrinM+sxUTJ7ujIi9mCn7ToBv5aDu3eity7woWCf8YxG3QVRsfyBoJR1p8muTkH5CXxKtIoMpVfrwlXIUu0gDCcKnEyaAZAU+EfqCP6NoikO/MaOizazgikKaAffFm7UBByakHgbZ0suJq3mMMdETGHWopp3ygEWntSc=
